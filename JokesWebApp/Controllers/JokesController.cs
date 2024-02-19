@@ -27,6 +27,18 @@ namespace JokesWebApp.Controllers
                           Problem("Entity set 'ApplicationDbContext.Joke'  is null.");
         }
 
+        // GET: Jokes/ShowSearchForm
+        public async Task<IActionResult> ShowSearchForm()
+        {
+            return View();
+        }
+
+        // POST: Jokes/ShowAllSearchResults
+        public async Task<IActionResult> ShowAllSearchResults(string sPhrase)
+        {
+            return View("Index",await _context.Joke.Where( item => item.JokeQuestion.Contains(sPhrase)).ToListAsync());
+        }
+
         // GET: Jokes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
